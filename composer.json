@@ -1,0 +1,15 @@
+{
+    "name": "dromotherm",
+    "homepage": "http://www.dromotherm.com",
+    "support": {
+        "forum": "https://dromotherm.github.io/documentation"
+    },
+    "require-dev": {
+        "php-parallel-lint/php-parallel-lint": "^1.2.0"
+    },
+    "scripts": {
+        "test": [
+            "parallel-lint . --exclude vendor"
+        ]
+    }
+}
