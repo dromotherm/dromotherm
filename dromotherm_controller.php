@@ -17,7 +17,7 @@ function dromotherm_controller() {
     if (!$session['write']) return false;
 
     // view the module control panel
-    if ($route->action == "") {
+    if ($route->action == "view") {
         $route->format = 'html';
         return view("Modules/dromotherm/dromotherm_view.php", array());
     }
