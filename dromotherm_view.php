@@ -32,7 +32,7 @@ $("#learn").click(function(){
         async: true,
         success: function(data) {
             //console.log(data);
-            $("#pompe").html(data[2]);
+            $("#pompe").html(data.join("<br>"));
         }
     });
 });

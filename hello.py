@@ -3,6 +3,19 @@
 print("hello")
 
 print("my friend")
+try:
+   import pymodbus
+except Exception as e:
+   print(e)
+else:
+   print("pymodbus is here")
+ 
+try:
+   import numpy as np
+except Exception as e:
+   print(e)
+else:
+   print("numpy is here")
 
 try:
    import redis
