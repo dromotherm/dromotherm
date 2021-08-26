@@ -4,7 +4,7 @@
 
     if ($session["write"]) {
 
-        $menu["dromotherm"] = array("name"=>"dromotherm", "order"=>3, "icon"=>"bullhorn", "default"=>"dromotherm/apihelp",  "l2"=>array());
+        $menu["dromotherm"] = array("name"=>"dromotherm", "order"=>3, "icon"=>"bullhorn", "default"=>"dromotherm",  "l2"=>array());
 
         $menu["dromotherm"]['l2']["help"] = array(
             "name"=>"API help",
@@ -17,6 +17,6 @@
             "name"=>"view",
             "href"=>"dromotherm",
             "icon"=>"show_chart",
-            "order"=>1
+            "order"=>2
         );
    }

@@ -1,3 +1,7 @@
+<?php
+    global $path;
+    $root = "{$path}dromotherm/";
+?>
 <style>
 pre {
     width:100%;
@@ -15,5 +19,22 @@ pre {
 <div style="padding:20px">
 
     <h2>dromotherm</h2>
+    <button class="btn btn-warning" id="learn">learn</button><br><br>
+    <div id="pompe"></div>
 
 </div>
+<script>
+var root = "<?php echo $root; ?>";
+$("#learn").click(function(){
+    $.ajax({
+        url: root+"/read",
+        dataType: 'json',
+        async: true,
+        success: function(data) {
+            //console.log(data);
+            $("#pompe").html(data[2]);
+        }
+    });
+});
+
+</script>
