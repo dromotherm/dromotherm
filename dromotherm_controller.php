@@ -38,6 +38,17 @@ function dromotherm_controller() {
         //print($retval);
         return $res;
     }
+    
+    if ($route->action == "dromoupdate") {
+        $route->format = "text";
+        $cmd = "wget -O /opt/openenergymonitor/test.py https://raw.githubusercontent.com/dromotherm/sandbox/master/test.py>/dev/null";
+        if ($redis->rpush("service-runner",$cmd)) {
+            $result= "service-runner trigger for command $cmd";
+        } else {
+            $result= "could not send trigger";
+        }
+        return $result;
+    }
 
     // Pass back result
     return array('content' => $result);
