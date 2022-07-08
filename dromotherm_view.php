@@ -19,21 +19,23 @@ pre {
 <div style="padding:20px">
 
     <h2>dromotherm</h2>
-    <button class="btn btn-warning" id="learn">learn</button><br><br>
+    <button class="btn btn-warning" id="learn">learn</button><input type="text" id="nb" size="4"><br><br>
     <div id="pompe"></div>
     <button class="btn btn-warning" id="dromoupdate">mettre à jour dromotherm.py</button><br><br> 
     
 </div>
 <script>
 var root = "<?php echo $root; ?>";
+var nb = "";
 $("#learn").click(function(){
+    nb = $("#nb").val();
     $.ajax({
         url: root+"/read",
         dataType: 'json',
         async: true,
         success: function(data) {
             //console.log(data);
-            $("#pompe").html(data.join("<br>"));
+            $("#pompe").html(nb+data.join("<br>"));
         }
     });
 });
