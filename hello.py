@@ -18,6 +18,7 @@ try:
     import click, redis
 except Exception as e:
     print(e)
+    print("<br><br><br>")
 else:
     @click.command()
     @click.option('--nb', type=int, default=14)
@@ -26,10 +27,12 @@ else:
         promux = r.hmget("feed:{}".format(nb),"value", "time")
         value = promux[0].decode()
         ts = promux[1].decode()
+        print("<br><br>FLUX {}".format(nb))
         print("valeur lue dans redis : {}".format(value))
         print("age selon redis : {} s".format(ts))
     print("redis-py : OK")
     print("click@pallets : OK")
     getLastValue()
+    print("<br><br><br>")
  
-print("<br><br><br>")
+
