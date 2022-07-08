@@ -18,7 +18,6 @@ try:
     import click, redis
 except Exception as e:
     print(e)
-    print("<br><br><br>")
 else:
     @click.command()
     @click.option('--nb', type=int, default=14)
@@ -33,6 +32,3 @@ else:
     print("redis-py : OK")
     print("click@pallets : OK")
     getLastValue()
-    print("<br><br><br>")
- 
-
