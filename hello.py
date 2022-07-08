@@ -15,16 +15,21 @@ else:
     print("numpy : OK")
 
 try:
-    import redis
-except Exception as e :
+    import click, redis
+except Exception as e:
     print(e)
 else:
+    @click.command()
+    @click.option('--nb', type=int, default=14, prompt='numéro du flux PHPFINA')
+    def getLastValue(nb):
+        r = redis.Redis(host="localhost", port=6379, db=0)
+        promux = r.hmget("feed:{}".format(nb),"value", "time")
+        value = promux[0].decode()
+        ts = promux[1].decode()
+        print("valeur lue dans redis : {}".format(value))
+        print("age selon redis : {} s".format(ts))
     print("redis-py : OK")
-    r = redis.Redis(host="localhost", port=6379, db=0)
-    promux = r.hmget("feed:14","value", "time")
-    value = promux[0].decode()
-    ts = promux[1].decode()
-    print("{} W/m2".format(value))
-    print("age : {}".format(ts))
-
+    print("click@pallets : OK")
+    getlastValue()
+ 
 print("<br><br><br>")
