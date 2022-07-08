@@ -21,7 +21,8 @@ pre {
     <h2>dromotherm</h2>
     <button class="btn btn-warning" id="learn">learn</button><br><br>
     <div id="pompe"></div>
-
+    <button class="btn btn-warning" id="dromoupdate">mettre à jour dromotherm.py</button><br><br> 
+    
 </div>
 <script>
 var root = "<?php echo $root; ?>";
@@ -34,6 +35,17 @@ $("#learn").click(function(){
             //console.log(data);
             $("#pompe").html(data.join("<br>"));
         }
+    });
+});
+
+$("#dromoupdate").click(function(){
+    $.ajax({
+      dataType: 'text',
+      url: root+"/dromoupdate",
+      async: true,
+      success: function(data){
+          alert(data);
+      }
     });
 });
 
