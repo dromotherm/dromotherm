@@ -22,6 +22,7 @@ pre {
     Numéro du flux à interroger : <input type="text" id="nb"><br>
     <button class="btn btn-warning" id="learn">learn</button><br><br>
     <div id="pompe"></div>
+    <br><br><br>
     <button class="btn btn-warning" id="dromoupdate">mettre à jour dromotherm.py</button><br><br> 
     
 </div>
