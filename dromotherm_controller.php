@@ -41,7 +41,9 @@ function dromotherm_controller() {
     
     if ($route->action == "dromoupdate") {
         $route->format = "text";
-        $cmd = "wget -O /opt/openenergymonitor/test.py https://raw.githubusercontent.com/dromotherm/sandbox/master/test.py>/dev/null";
+        $destination = "/opt/openenergymonitor/BIOS2/hardware/dromotherm.py";
+        $origin = "https://raw.githubusercontent.com/dromotherm/dromotherm/master/dromotherm.py";
+        $cmd = "wget -O $destination $origin>/dev/null";
         if ($redis->rpush("service-runner",$cmd)) {
             $result= "service-runner trigger for command $cmd";
         } else {
