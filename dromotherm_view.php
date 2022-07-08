@@ -19,7 +19,8 @@ pre {
 <div style="padding:20px">
 
     <h2>dromotherm</h2>
-    <button class="btn btn-warning" id="learn">learn</button><input type="text" id="nb" size="4"><br><br>
+    Numéro du flux à interroger : <input type="text" id="nb"><br>
+    <button class="btn btn-warning" id="learn">learn</button><br><br>
     <div id="pompe"></div>
     <button class="btn btn-warning" id="dromoupdate">mettre à jour dromotherm.py</button><br><br> 
     
@@ -30,12 +31,12 @@ var nb = "";
 $("#learn").click(function(){
     nb = $("#nb").val();
     $.ajax({
-        url: root+"/read",
+        url: root+"/read/"+nb,
         dataType: 'json',
         async: true,
         success: function(data) {
             //console.log(data);
-            $("#pompe").html(nb+data.join("<br>"));
+            $("#pompe").html(data.join("<br>"));
         }
     });
 });
