@@ -30,6 +30,6 @@ else:
         print("age selon redis : {} s".format(ts))
     print("redis-py : OK")
     print("click@pallets : OK")
-    getlastValue()
+    getLastValue()
  
 print("<br><br><br>")
