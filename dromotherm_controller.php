@@ -32,6 +32,10 @@ function dromotherm_controller() {
     if ($route->action == "read") {
         $route->format = "json";
         $cmd = "Modules/dromotherm/./hello.py";
+        if ($route->subaction) {
+            $nb = $route->subaction;
+            $cmd = "$cmd --nb=$nb";
+        }
         exec($cmd, $res, $retval);
         //exec('whoami', $res, $retval);
         //print_r($res);
@@ -39,6 +43,8 @@ function dromotherm_controller() {
         return $res;
     }
     
+    //*************************************************************************************************
+    // envoie une commande au service-runner
     if ($route->action == "dromoupdate") {
         $route->format = "text";
         $destination = "/opt/openenergymonitor/BIOS2/hardware/dromotherm.py";
