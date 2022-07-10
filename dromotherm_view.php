@@ -19,11 +19,20 @@ pre {
 <div style="padding:20px">
 
     <h2>dromotherm</h2>
-    Numéro du flux à interroger : <input type="text" id="nb"><br>
-    <button class="btn btn-warning" id="learn">learn</button><br><br>
+    <div>
+      Numéro du flux à interroger : <input type="text" id="nb">
+      <br>
+      <button class="btn btn-warning" id="learn">learn</button>
+      <br><br>
+    </div>
     <div id="pompe"></div>
     <br><br><br>
-    <button class="btn btn-warning" id="dromoupdate">mettre à jour dromotherm.py</button><br><br> 
+    <div>
+      <button class="btn btn-warning" id="dromoupdate">mettre à jour dromotherm.py</button>
+      <br>
+      Télécharge la dernière version de dromotherm.py depuis <a href=https://github.com/dromotherm/dromotherm>https://github.com/dromotherm/dromotherm</a>
+      <br>
+    </div>
     
 </div>
 <script>
