@@ -6,6 +6,8 @@ import json
 import numpy as np
 from modbusTools import *
 
+"Test telechargement Prince"
+
 # intervalle de pilotage
 interval = 10
 
