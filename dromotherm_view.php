@@ -29,7 +29,7 @@ pre {
     <br><br><br>
     <div>
       Télécharge la dernière version de dromotherm.py depuis <a href=https://github.com/dromotherm/dromotherm>https://github.com/dromotherm/dromotherm</a><br>
-      <button class="btn btn-warning" id="dromoupdate">mettre à jour</button>
+      <br><button class="btn btn-warning" id="dromoupdate">mettre à jour</button>
       <br><br><br>
     </div>
     <div>
