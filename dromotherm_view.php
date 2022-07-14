@@ -33,9 +33,9 @@ pre {
       <br><br><br>
     </div>
     <div>
-      **A NOTER :** 
+      <b>SAUVEGARDES</b> 
       <br>Un zip des datas est sauvegardé tous les jours sur github : <a href=https://github.com/dromotherm/fieldsave/actions>https://github.com/dromotherm/fieldsave/actions</a>
-      <br><br>pour le télécharger :
+      <br><br>pour le télécharger depuis le repo github :
       <br>1) on clique sur le workflow "download backup", 
       <br>2) on choisit le run le plus récent en date,
       <br>3) on télécharge l'artifact qui doit être nommé dromotherm_backup  
