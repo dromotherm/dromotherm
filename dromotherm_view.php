@@ -40,7 +40,7 @@ pre {
       <br>0) on va sur le repo github <a href=https://github.com/dromotherm/fieldsave/actions>https://github.com/dromotherm/fieldsave/actions</a>
       <br>1) on clique sur le workflow "download backup", 
       <br>2) on choisit le run le plus récent en date,
-      <br>3) on télécharge l'artifact qui doit être nommé dromotherm_backup  
+      <br>3) on télécharge l'artifact nommé dromotherm_backup  
     </div>
     
 </div>
