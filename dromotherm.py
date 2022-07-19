@@ -66,7 +66,8 @@ slaves = {
     "road_pump_variator": {"id": 38, "address": 7, "type": "analog"}
 }
 feeds = {
-    "road_temp": {"feeds" : [10], "fakeValue":25}
+    "road_temp": {"feeds" : [24,26], "fakeValue":25},
+    "Text":{"feeds":[13,20], "fakeValue":34}
 }
 
 def modbusWriteCoil(modbusCon, id, address, val):
@@ -173,13 +174,17 @@ class Dromotherm:
             if self._conf["slaves"]["road_pump"]["mode"] == "run":
                 self.write(c, "road_pump", True)
             if self._conf["slaves"]["road_pump"]["mode"] == "auto":
+                self._log.info("Test sur Text : {}".format(self.read("Text")))
+                self._log.info("Test sur Tint : {}".format(self.read("Tint")))
                 # Le mode auto est à écrire, ici juste un premier exemple
-                if heureActuelle > 8 and heureActuelle < 20:  #si on est dans la plage horaire 8h-20h on allume la pompe
+                if self.read("Tint") > 27:  #si on est dans la plage horaire 8h-20h on allume la pompe
+                    self._log.info("road_pump True")
                     self.write(c, "road_pump", True)
                 else:
+                    self._log.info("road_pump False")
                     self.write(c, "road_pump", False)
 
-            #Action sur la pompe pour la PAC : 3 cas, stop, run, et auto
+            '''#Action sur la pompe pour la PAC : 3 cas, stop, run, et auto
             self._log.info("Action sur {}, mode : {}".format("PAC_pump",self._conf["slaves"]["PAC_pump"]["mode"]))
             if self._conf["slaves"]["PAC_pump"]["mode"] == "stop":
                 self.write(c, "PAC_pump", False)
@@ -204,7 +209,7 @@ class Dromotherm:
                 if self.read("road_temp") > 27:  #si road_temps supérieur à 27, on allume la pompe
                     self.write(c, "storage_pump", True)
                 else:
-                    self.write(c, "storage_pump", False)
+                    self.write(c, "storage_pump", False)'''
 
             #Action sur le variateur de la pompe de la chaussée : 2 cas, forced et auto
             self._log.info(
@@ -330,7 +335,10 @@ if __name__ == "__main__":
     # Log file
     parser.add_argument('--log', action='store')
     # on donne à args.conf une valeur par défaut pour qu'il existe forcément
-    parser.add_argument("--conf", action="store", default="{}/dromotherm.conf".format(sys.path[0]))
+    if sys.path[0][0:2]=="C:":
+       parser.add_argument("--conf", action="store", default="{}/dromotherm.conf".format("D:/Utilisateurs/sevif/Documents/GitHub/dromothermCabane"))
+    else:
+       parser.add_argument("--conf", action="store", default="{}/dromotherm.conf".format(sys.path[0]))
     parser.add_argument("--mode", action="store", default="tcp")
     args = parser.parse_args()
 
