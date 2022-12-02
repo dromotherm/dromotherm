@@ -200,7 +200,7 @@ class Dromotherm:
 
             #Action sur la pompe du ventilo-convecteur: 3 cas, stop, run, et auto
             self._log.info(
-                "Action sur {}, mode : {}".format("storage_pump", self._conf["slaves"]["fan_coil_pump"]["mode"]))
+                "Action sur {}, mode : {}".format("fan_coil_pump", self._conf["slaves"]["fan_coil_pump"]["mode"]))
             if self._conf["slaves"]["fan_coil_pump"]["mode"] == "stop":
                 self.write(c, "fan_coil_pump", False)
             if self._conf["slaves"]["fan_coil_pump"]["mode"] == "run":
@@ -218,7 +218,7 @@ class Dromotherm:
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "stop":
                 self.write(c, "domestic_hot_water_pump", False)
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "run":
-                self.write(c, "storage_pump", True)
+                self.write(c, "domestic_hot_water_pump", True)
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto":
                 # Le mode auto est à écrire, ici juste un premier exemple
                 if self.read("road_temp") > 27:  #si road_temps supérieur à 27, on allume la pompe
