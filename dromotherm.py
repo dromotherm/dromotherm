@@ -63,7 +63,7 @@ slaves = {
     "PAC": {"id": 37, "address": 1, "mode": "stop", "type": "digital"},
     "fan_coil_pump": {"id": 37, "address": 2, "mode": "stop", "type": "digital"},
     "domestic_hot_water_pump": {"id": 37, "address": 3, "mode": "stop", "type": "digital"},
-    "storage_pump": {"id": 37, "address": 4, "mode": "stop", "type": "digital"},    
+    "storage_pump": {"id": 37, "address": 4, "mode": "stop", "type": "digital"},
     "road_pump_variator": {"id": 38, "address": 7, "type": "analog"}
 }
 feeds = {
@@ -197,7 +197,7 @@ class Dromotherm:
                     self.write(c, "PAC", True)
                 else:
                     self.write(c, "PAC", False)
-           
+
             #Action sur la pompe du ventilo-convecteur: 3 cas, stop, run, et auto
             self._log.info(
                 "Action sur {}, mode : {}".format("storage_pump", self._conf["slaves"]["fan_coil_pump"]["mode"]))
@@ -210,8 +210,8 @@ class Dromotherm:
                 if self.read("road_temp") > 27:  #si road_temps supérieur à 27, on allume la pompe
                     self.write(c, "fan_coil_pump", True)
                 else:
-                    self.write(c, "fan_coil_pump", False)            
-            
+                    self.write(c, "fan_coil_pump", False)
+
             #Action sur la pompe de l'eau chaude sanitaire (la corbeille) : 3 cas, stop, run, et auto
             self._log.info(
                 "Action sur {}, mode : {}".format("domestic_hot_water_pump", self._conf["slaves"]["domestic_hot_water_pump"]["mode"]))
@@ -224,8 +224,8 @@ class Dromotherm:
                 if self.read("road_temp") > 27:  #si road_temps supérieur à 27, on allume la pompe
                     self.write(c, "domestic_hot_water_pump", True)
                 else:
-                    self.write(c, "domestic_hot_water_pump", False)           
-           
+                    self.write(c, "domestic_hot_water_pump", False)
+
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
             self._log.info(
                 "Action sur {}, mode : {}".format("storage_pump", self._conf["slaves"]["storage_pump"]["mode"]))
@@ -240,7 +240,7 @@ class Dromotherm:
                 else:
                     self.write(c, "storage_pump", False)
 
-                    
+
             #Action sur le variateur de la pompe de la chaussée : 2 cas, forced et auto
             self._log.info(
                 "Action sur {}, mode : {}".format("road_pump_variator", self._conf["slaves"]["road_pump_variator"]["mode"]))
@@ -249,7 +249,7 @@ class Dromotherm:
             if self._conf["slaves"]["road_pump_variator"]["mode"] == "auto":
                 # Le mode auto est à écrire, ici juste un premier exemple
                 self.write(c, "road_pump_variator", 0.5) #On met le variateur à 0.5 (50%) de sa puissance
-           
+
             c.close()
             if not c.is_socket_open():
                 self._log.debug("All queries finished - modbus connection is closed")
