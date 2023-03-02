@@ -68,7 +68,8 @@ slaves = {
 }
 feeds = {
     "road_temp": {"feeds" : [24,26], "fakeValue":25},
-    "Text":{"feeds":[13,20], "fakeValue":34}
+    "Text":{"feeds":[13,20], "fakeValue":34},
+    "temp_int": 11
 }
 
 def modbusWriteCoil(modbusCon, id, address, val):
@@ -207,7 +208,7 @@ class Dromotherm:
                 self.write(c, "fan_coil_pump", True)
             if self._conf["slaves"]["fan_coil_pump"]["mode"] == "auto":
                 # Le mode auto est à écrire, ici juste un premier exemple
-                if self.read("road_temp") > 27:  #si road_temps supérieur à 27, on allume la pompe
+                if self.read("temp_int") < 19:  #si la température intérieure de la cabane est inférieure à 19°C, on allume la pompe
                     self.write(c, "fan_coil_pump", True)
                 else:
                     self.write(c, "fan_coil_pump", False)
