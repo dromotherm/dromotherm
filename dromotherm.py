@@ -69,7 +69,7 @@ slaves = {
 feeds = {
     "road_temp": {"feeds" : [24,26], "fakeValue":25},
     "Text":{"feeds":[13,20], "fakeValue":34},
-    "temp_int": 11
+    "temp_int": {"feeds":11}
 }
 
 def modbusWriteCoil(modbusCon, id, address, val):
