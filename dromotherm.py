@@ -26,6 +26,8 @@ Tout se passe dans la fonction "action" (rechercher "def action(self):").
 Dans la fonction action est présent un exemple de contrôle des pompes et variateurs.
 On peut aussi choisir l'intervalle de pilotage (ici toutes les 10s). attention, comme les données sont mises à jour toutes les 30s, mettre un intervalle trop bas est inutile.
 
+Pour récuperer le fichier depuis github et le mettre dans le raspebrry, aller sur http://dromotherm.ddns.net/ puis menu dromotherm/view puis cliquer sur "mettre à jour"
+
 Dans le fichier, il y a des slaves et des feeds :
    Les slaves sont les éléments à contrôler (relais, sortie 4-20mA pour variateur...)
    Les feeds sont des entrées (pour lire les valeurs reçues des capteurs)
@@ -69,7 +71,7 @@ slaves = {
 feeds = {
     "road_temp": {"feeds" : [24,26], "fakeValue":25},
     "Text":{"feeds":[13,20], "fakeValue":34},
-    "temp_int": {"feeds":11}
+    "temp_int": {"feeds":[11]}
 }
 
 def modbusWriteCoil(modbusCon, id, address, val):
