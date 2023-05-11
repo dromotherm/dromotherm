@@ -69,9 +69,10 @@ slaves = {
     "road_pump_variator": {"id": 38, "address": 7, "type": "analog"}
 }
 feeds = {
-    "road_temp": {"feeds" : [24,26], "fakeValue":25},
+    "road_temp": {"feeds" : [30,32,72,67,73,74],"fakeValue":25},
+    "storage_temp": {"feeds" : [48,46,47,49,50,51,54,52,56,55,59,61,57,60,58,45,42,52,43,44,64,63,62,65,66],"fakeValue":10},
     "Text":{"feeds":[13,20], "fakeValue":34},
-    "temp_int": {"feeds":[11]}
+    "temp_int": {"feeds":[11]},    
 }
 
 def modbusWriteCoil(modbusCon, id, address, val):
@@ -178,10 +179,8 @@ class Dromotherm:
             if self._conf["slaves"]["road_pump"]["mode"] == "run":
                 self.write(c, "road_pump", True)
             if self._conf["slaves"]["road_pump"]["mode"] == "auto":
-                self._log.info("Test sur Text : {}".format(self.read("Text")))
-                self._log.info("Test sur Tint : {}".format(self.read("Tint")))
                 # Le mode auto est à écrire, ici juste un premier exemple
-                if self.read("Tint") > 27:  #si on est dans la plage horaire 8h-20h on allume la pompe
+                if self.read("road_temp-storage_temp")>5:  #si la température de la chaussée est sup à la temp. du stockage de 5°C on allume la pompe
                     self._log.info("road_pump True")
                     self.write(c, "road_pump", True)
                 else:
