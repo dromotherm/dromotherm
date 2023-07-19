@@ -9,7 +9,7 @@ from modbusTools import *
 "Test telechargement Prince"
 
 # intervalle de pilotage
-interval = 10
+interval = 30
 
 #Réglages généraux à ne pas toucher
 common = {
@@ -72,7 +72,9 @@ feeds = {
     "road_temp": {"feeds" : [30,32,72,67,73,74],"fakeValue":25},
     "storage_temp": {"feeds" : [48,46,47,49,50,51,54,52,56,55,59,61,57,60,58,45,42,52,43,44,64,63,62,65,66],"fakeValue":10},
     "Text":{"feeds":[13,20], "fakeValue":34},
-    "temp_int": {"feeds":[11]},    
+    "temp_int": {"feeds":[11]}, 
+    "entreeECS": {"feeds":[125]},
+    "retourECS": {"feeds":[124]}    
 }
 
 def modbusWriteCoil(modbusCon, id, address, val):
@@ -222,12 +224,13 @@ class Dromotherm:
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "run":
                 self.write(c, "domestic_hot_water_pump", True)
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto":
-                # Le mode auto est à écrire, ici juste un premier exemple
-                if self.read("road_temp") > 27:  #si road_temps supérieur à 27, on allume la pompe
-                    self.write(c, "domestic_hot_water_pump", True)
-                else:
-                    self.write(c, "domestic_hot_water_pump", False)
-
+                # Le mode auto est à écrire, ici juste un premier exemple              
+                if heureActuelle>0 and heureActuelle<24:
+                    energie_ECS=0
+                    while energie_ECS< 0.05:
+                        self.write(c, "domestic_hot_water_pump", True)    
+                        energie_ECS+=1040*(0.5/3600)*3.942*(self.read("entreeECS")-self.read("retourECS"))*interval/3600                                       
+                    self.write(c, "domestic_hot_water_pump", False)    
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
             self._log.info(
                 "Action sur {}, mode : {}".format("storage_pump", self._conf["slaves"]["storage_pump"]["mode"]))
