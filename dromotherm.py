@@ -229,7 +229,7 @@ class Dromotherm:
                     energie_ECS=0
                     while energie_ECS< 0.01:
                         self.write(c, "domestic_hot_water_pump", True)    
-                        energie_ECS+=1040*(0.5/3600)*3.942*(self.read("entreeECS")-self.read("retourECS"))*interval/3600                                       
+                        energie_ECS+=1040*(0.5/3600)*3.942*abs(self.read("entreeECS")-self.read("retourECS"))*30/3600                                       
                     self.write(c, "domestic_hot_water_pump", False)    
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
             self._log.info(
