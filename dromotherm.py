@@ -227,7 +227,7 @@ class Dromotherm:
                 # Le mode auto est à écrire, ici juste un premier exemple              
                 if heureActuelle>0 and heureActuelle<24:
                     energie_ECS=0
-                    while energie_ECS< 0.05:
+                    while energie_ECS< 0.01:
                         self.write(c, "domestic_hot_water_pump", True)    
                         energie_ECS+=1040*(0.5/3600)*3.942*(self.read("entreeECS")-self.read("retourECS"))*interval/3600                                       
                     self.write(c, "domestic_hot_water_pump", False)    
