@@ -226,7 +226,7 @@ class Dromotherm:
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto":
                 # Le mode auto est à écrire, ici juste un premier exemple              
                 if heureActuelle>0 and heureActuelle<12:                                                     
-                    self.write(c, "domestic_hot_water_pump", True)
+                    self.write(c, "domestic_hot_water_pump", False)
                 else:
                     self.write(c, "domestic_hot_water_pump", False)                    
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
