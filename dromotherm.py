@@ -225,12 +225,10 @@ class Dromotherm:
                 self.write(c, "domestic_hot_water_pump", True)
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto":
                 # Le mode auto est à écrire, ici juste un premier exemple              
-                if heureActuelle>0 and heureActuelle<24:
-                 
-                    while energie_ECS<20:
-                        self.write(c, "domestic_hot_water_pump", True)    
-                        energie_ECS+=abs(self.read("entreeECS")-self.read("retourECS"))                                      
-                    self.write(c, "domestic_hot_water_pump", False)    
+                if heureActuelle>0 and heureActuelle<12:                                                     
+                    self.write(c, "domestic_hot_water_pump", True)
+                else:
+                    self.write(c, "domestic_hot_water_pump", False)                    
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
             self._log.info(
                 "Action sur {}, mode : {}".format("storage_pump", self._conf["slaves"]["storage_pump"]["mode"]))
