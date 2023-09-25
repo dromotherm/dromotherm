@@ -64,7 +64,7 @@ slaves = {
     "road_pump": {"id": 37, "address": 0, "mode": "stop", "type": "digital"},
     "PAC": {"id": 37, "address": 1, "mode": "stop", "type": "digital"},
     "fan_coil_pump": {"id": 37, "address": 2, "mode": "stop", "type": "digital"},
-    "domestic_hot_water_pump": {"id": 37, "address": 3, "mode": "stop", "type": "digital"},
+    "domestic_hot_water_pump": {"id": 37, "address": 3, "mode": "auto", "type": "digital"},
     "storage_pump": {"id": 37, "address": 4, "mode": "stop", "type": "digital"},
     "road_pump_variator": {"id": 38, "address": 7, "type": "analog"}
 }
@@ -224,7 +224,7 @@ class Dromotherm:
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "run":
                 self.write(c, "domestic_hot_water_pump", True)
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto": 
-                self._log.info("heure actuelle : " +str(heureactuelle))
+                self._log.info("heure actuelle : " +str(heureActuelle))
                 if heureActuelle>10:
                     self._log.info("ok on rentre dans la couble auto")
                     self.write(c, "domestic_hot_water_pump", True)
