@@ -224,7 +224,7 @@ class Dromotherm:
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "run":
                 self.write(c, "domestic_hot_water_pump", True)
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto": 
-                self._log.info("heure actuelle {}".format(heureactuelle))
+                self._log.info("heure actuelle {}".format(heureActuelle))
                 if heureActuelle>10:
                     self._log.info("ok on rentre dans la couble auto")
                     self.write(c, "domestic_hot_water_pump", True) 
