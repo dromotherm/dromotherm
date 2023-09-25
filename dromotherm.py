@@ -183,10 +183,10 @@ class Dromotherm:
             if self._conf["slaves"]["road_pump"]["mode"] == "auto":
                 # Le mode auto est à écrire, ici juste un premier exemple
                 if self.read("road_temp")-self.read("storage_temp")>5:  #si la temp. de la chaussée est sup à la temp. du stockage de 5°C on allume la pompe
-                    self._log.info("road_pump True")
+
                     self.write(c, "road_pump", True)
                 else:
-                    self._log.info("road_pump False")
+      
                     self.write(c, "road_pump", False)
 
             #Action sur pour la PAC (les deux pompes sont déjà intégreés à la PAC) : 3 cas, stop, run, et auto
@@ -223,9 +223,12 @@ class Dromotherm:
                 self.write(c, "domestic_hot_water_pump", False)
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "run":
                 self.write(c, "domestic_hot_water_pump", True)
-            if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto":
-                                                                         
-                self.write(c, "domestic_hot_water_pump", False)
+            if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto": 
+                
+                if heureActuelle>10:
+                    
+                    self.write(c, "domestic_hot_water_pump", True)
+                    
                
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
             self._log.info(
