@@ -229,7 +229,10 @@ class Dromotherm:
                     
                     self.write(c, "domestic_hot_water_pump", True)
                     
-               
+                if self.read("temp_int") < 19:
+                    
+                    self.write(c, "domestic_hot_water_pump", True)                    
+             
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
             self._log.info(
                 "Action sur {}, mode : {}".format("storage_pump", self._conf["slaves"]["storage_pump"]["mode"]))
