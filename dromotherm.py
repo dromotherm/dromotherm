@@ -114,6 +114,7 @@ class Dromotherm:
         self._log = logging.getLogger("dromotherm")
         self._log.setLevel("DEBUG")
         self._log.info("............OPENING DROMOTHERM............")
+        self._log.info("version : 1")
 
     def createConfFile(self):
         with open(self._confname, "w") as f:
