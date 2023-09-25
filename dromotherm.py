@@ -227,7 +227,7 @@ class Dromotherm:
                 self._log.info("heure actuelle : " +str(heureactuelle))
                 if heureActuelle>10:
                     self._log.info("ok on rentre dans la couble auto")
-                    self.write(c, "domestic_hot_water_pump", True)
+                    self.write(c, "domestic_hot_water_pump", True) 
                     
  
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
