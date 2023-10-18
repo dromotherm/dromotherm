@@ -114,7 +114,7 @@ class Dromotherm:
         self._log = logging.getLogger("dromotherm")
         self._log.setLevel("DEBUG")
         self._log.info("............OPENING DROMOTHERM............")
-        self._log.info("version : 3")
+        self._log.info("version : 4")
 
     def createConfFile(self):
         with open(self._confname, "w") as f:
@@ -229,8 +229,8 @@ class Dromotherm:
                 self.write(c, "domestic_hot_water_pump", True)
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto": 
                 self._log.info("heure actuelle")
+                self._log.info("ok on rentre dans la conf auto")
                 if heureActuelle>=6 and heureActuelle<=7:
-                    self._log.info("ok on rentre dans la conf auto")
                     self.write(c, "domestic_hot_water_pump", True) 
                 else:
                     self.write(c, "domestic_hot_water_pump", False)
