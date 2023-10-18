@@ -114,7 +114,7 @@ class Dromotherm:
         self._log = logging.getLogger("dromotherm")
         self._log.setLevel("DEBUG")
         self._log.info("............OPENING DROMOTHERM............")
-        self._log.info("version : 4")
+        self._log.info("version :3")
 
     def createConfFile(self):
         with open(self._confname, "w") as f:
@@ -229,16 +229,18 @@ class Dromotherm:
                 self.write(c, "domestic_hot_water_pump", True)
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto": 
                 self._log.info("heure actuelle")
-                self._log.info("ok on rentre dans la conf auto")
+                self._log.info("ok on rentre dans la conf auto")                                 
+                if heureActuelle>0 and heureActuelle<6:
+                    self.write(c, "domestic_hot_water_pump", False)                
                 if heureActuelle>=6 and heureActuelle<=7:
                     self.write(c, "domestic_hot_water_pump", True)
-                elif heureActuelle<=14 and heureActuelle<=16:
-                    self.write(c, "domestic_hot_water_pump", True)                        
-                else:
-                    self.write(c, "domestic_hot_water_pump", False)
-
-                    
- 
+                if heureActuelle>7 and heureActuelle<15:
+                    self.write(c, "domestic_hot_water_pump", False) 
+                if heureActuelle>=15 and heureActuelle<=17:
+                    self.write(c, "domestic_hot_water_pump", True)                    
+                if heureActuelle>17 and heureActuelle<=24:
+                    self.write(c, "domestic_hot_water_pump", False)   
+                      
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
             self._log.info(
                 "Action sur {}, mode : {}".format("storage_pump", self._conf["slaves"]["storage_pump"]["mode"]))
