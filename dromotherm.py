@@ -158,7 +158,7 @@ class Dromotherm:
         Cette fonction est la seule fonction à éditer. Plusieurs versions de contrôle pourront être explorées, fonction des résultats de la thèse.
         :return:
         """
-
+        somme=0
         self._log.debug("Action")
 
         # On récupère heure et minute pour les scenarios quotidiens
@@ -175,7 +175,7 @@ class Dromotherm:
         energie_ECS=0
         debit_ecs=488/3600 # 488L/heure
         Cp_e=4.18 # kJ/Kg
-        somme=0
+
         c = self.connexion()
         if c.connect():
             #Action sur la pompe de la chaussée : 3 cas, stop, run, et auto
@@ -229,17 +229,12 @@ class Dromotherm:
                 self.write(c, "domestic_hot_water_pump", True)
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto": 
                 self._log.info("heure actuelle")
-                if heureActuelle>8 and heureActuelle<18:
+                if heureActuelle>=6 and heureActuelle<=7 or heureActuelle>=18 and heureActuelle<=19:
                     self._log.info("ok on rentre dans la conf auto")
-                    if somme < 10:
-                        self.write(c, "domestic_hot_water_pump", True) 
-                        somme=somme+abs(self.read("entreeECS")-self.read("retourECS"))
-                    else:
-                        
-                        self.write(c,"domestic_hot_water_pump",False)
-                        somme=0
+                    self.write(c, "domestic_hot_water_pump", True) 
                 else:
-                    self.write(c, "domestic_hot_water_pump", False) 
+                    self.write(c, "domestic_hot_water_pump", False)
+
                     
  
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
