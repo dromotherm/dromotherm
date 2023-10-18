@@ -73,10 +73,11 @@ feeds = {
     "storage_temp": {"feeds" : [48,46,47,49,50,51,54,52,56,55,59,61,57,60,58,45,42,52,43,44,64,63,62,65,66],"fakeValue":10},
     "Text":{"feeds":[13,20], "fakeValue":34},
     "temp_int": {"feeds":[11]}, 
-    "entreeECS": {"feeds":[125]},
-    "retourECS": {"feeds":[124]}    
+    "entreeECS": {"feeds":[125],"fakeValue":35},
+    "retourECS": {"feeds":[124],"fakeValue":30}    
 }
-
+debit_ecs=488/3600 # 488L/heure
+Cp_e=4.18 # kJ/Kg
 def modbusWriteCoil(modbusCon, id, address, val):
     """
     écriture sur un coil/bobine puis lecture de la valeur écrite
@@ -114,7 +115,7 @@ class Dromotherm:
         self._log = logging.getLogger("dromotherm")
         self._log.setLevel("DEBUG")
         self._log.info("............OPENING DROMOTHERM............")
-        self._log.info("version : 2")
+        self._log.info("version : 3")
 
     def createConfFile(self):
         with open(self._confname, "w") as f:
@@ -228,7 +229,11 @@ class Dromotherm:
                 self._log.info("heure actuelle")
                 if heureActuelle>8 and heureActuelle<18:
                     self._log.info("ok on rentre dans la conf auto")
-                    self.write(c, "domestic_hot_water_pump", True) 
+                    somme=0
+                    while somme < 40:
+                        self.write(c, "domestic_hot_water_pump", True) 
+                        somme=somme+abs(self.read("entreeECS")-self.read("retourECS"))
+                    self.write(c,"domestic_hot_water_pump",False)
                 else:
                     self.write(c, "domestic_hot_water_pump", False) 
                     
