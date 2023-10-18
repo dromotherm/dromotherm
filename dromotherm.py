@@ -231,11 +231,13 @@ class Dromotherm:
                 self._log.info("heure actuelle")
                 if heureActuelle>8 and heureActuelle<18:
                     self._log.info("ok on rentre dans la conf auto")
-                    print('somme=',somme)
-                    while somme < 400:
+                    if somme < 400:
                         self.write(c, "domestic_hot_water_pump", True) 
                         somme=somme+abs(self.read("entreeECS")-self.read("retourECS"))
-                    self.write(c,"domestic_hot_water_pump",False)
+                    else:
+                        
+                        self.write(c,"domestic_hot_water_pump",False)
+                        somme=0
                 else:
                     self.write(c, "domestic_hot_water_pump", False) 
                     
