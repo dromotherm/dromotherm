@@ -52,7 +52,7 @@ Pour les feeds :
 
 NOTE : les fichiers .conf utilisés par l'interface web sont dans /etc/bios/
 
-Les fichiers .conf dans /opt/openenergymonitor/BIOS2/hardware ne sont que des versions pour réaliser des tests de fonctionnement des matériels.
+Les fichiers .conf dans /opt/openenergymonitor/BIOS2/hardware ne sont que des s pour réaliser des tests de fonctionnement des matériels.
 Les exécutables du répertoire hardware sont tjrs à lancer une fois avant d'installer le service correspondant.
 Lors de la première exécution, le fichier conf est initialisé par l'exécutable, dans ce même dossier hardware.
 Lorsqu'on installe le service, l'installateur copie le fichier conf résidant dans hardware vers /etc/bios
@@ -76,8 +76,7 @@ feeds = {
     "entreeECS": {"feeds":[125],"fakeValue":35},
     "retourECS": {"feeds":[124],"fakeValue":30}    
 }
-debit_ecs=488/3600 # 488L/heure
-Cp_e=4.18 # kJ/Kg
+
 def modbusWriteCoil(modbusCon, id, address, val):
     """
     écriture sur un coil/bobine puis lecture de la valeur écrite
@@ -174,6 +173,9 @@ class Dromotherm:
         heureActuelle = int(tsToTuple(now).tm_hour)
         minuteActuelle = int(tsToTuple(now).tm_min)
         energie_ECS=0
+        debit_ecs=488/3600 # 488L/heure
+        Cp_e=4.18 # kJ/Kg
+        somme=0
         c = self.connexion()
         if c.connect():
             #Action sur la pompe de la chaussée : 3 cas, stop, run, et auto
@@ -229,8 +231,7 @@ class Dromotherm:
                 self._log.info("heure actuelle")
                 if heureActuelle>8 and heureActuelle<18:
                     self._log.info("ok on rentre dans la conf auto")
-                    somme=0
-                    while somme < 40:
+                    while somme < 400:
                         self.write(c, "domestic_hot_water_pump", True) 
                         somme=somme+abs(self.read("entreeECS")-self.read("retourECS"))
                     self.write(c,"domestic_hot_water_pump",False)
