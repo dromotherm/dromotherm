@@ -114,7 +114,7 @@ class Dromotherm:
         self._log = logging.getLogger("dromotherm")
         self._log.setLevel("DEBUG")
         self._log.info("............OPENING DROMOTHERM............")
-        self._log.info("version :3")
+        self._log.info("version :4")
 
     def createConfFile(self):
         with open(self._confname, "w") as f:
@@ -244,7 +244,7 @@ class Dromotherm:
                     self.write(c, "domestic_hot_water_pump", False) 
                 if heureActuelle>=18 and heureActuelle<20:
                     self.write(c, "domestic_hot_water_pump", True)                    
-                if heureActuelle>=20 and heureActuelle<24:
+                if heureActuelle>=20 and  heureActuelle<24:
                     self.write(c, "domestic_hot_water_pump", False)   
                       
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
