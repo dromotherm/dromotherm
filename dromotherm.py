@@ -200,12 +200,18 @@ class Dromotherm:
             if self._conf["slaves"]["PAC"]["mode"] == "run":
                 self.write(c, "PAC", True)
             if self._conf["slaves"]["PAC"]["mode"] == "auto":
-                # Le mode auto est à écrire, ici juste un premier exemple
-                if heureActuelle > 8 and heureActuelle < 18: #si on est dans la plage horaire 8h-20h on allume la pompe
+                self._log.info("heure actuelle")
+                self._log.info("ok on rentre dans la conf auto")                                 
+                if heureActuelle>=0 and heureActuelle<6:
+                    self.write(c, "PAC", False)                
+                if heureActuelle>=6 and heureActuelle<7:
                     self.write(c, "PAC", True)
-                else:
-                    self.write(c, "PAC", False)
-
+                if heureActuelle>=7 and heureActuelle<17:
+                    self.write(c, "PAC", False) 
+                if heureActuelle>=17 and heureActuelle<19:
+                    self.write(c, "PAC", True)                    
+                if heureActuelle>=19 and heureActuelle<24:
+                    self.write(c, "PAC", False)   
             #Action sur la pompe du ventilo-convecteur: 3 cas, stop, run, et auto
             self._log.info(
                 "Action sur {}, mode : {}".format("fan_coil_pump", self._conf["slaves"]["fan_coil_pump"]["mode"]))
@@ -230,15 +236,15 @@ class Dromotherm:
             if self._conf["slaves"]["domestic_hot_water_pump"]["mode"] == "auto": 
                 self._log.info("heure actuelle")
                 self._log.info("ok on rentre dans la conf auto")                                 
-                if heureActuelle>0 and heureActuelle<6:
+                if heureActuelle>=0 and heureActuelle<6:
                     self.write(c, "domestic_hot_water_pump", False)                
-                if heureActuelle>=6 and heureActuelle<=7:
+                if heureActuelle>=6 and heureActuelle<7:
                     self.write(c, "domestic_hot_water_pump", True)
-                if heureActuelle>7 and heureActuelle<15:
+                if heureActuelle>=7 and heureActuelle<17:
                     self.write(c, "domestic_hot_water_pump", False) 
-                if heureActuelle>=15 and heureActuelle<=17:
+                if heureActuelle>=17 and heureActuelle<19:
                     self.write(c, "domestic_hot_water_pump", True)                    
-                if heureActuelle>17 and heureActuelle<=24:
+                if heureActuelle>=19 and heureActuelle<24:
                     self.write(c, "domestic_hot_water_pump", False)   
                       
             #Action sur la pompe du stockage : 3 cas, stop, run, et auto
