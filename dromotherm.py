@@ -204,13 +204,13 @@ class Dromotherm:
                 self._log.info("ok on rentre dans la conf auto")                                 
                 if heureActuelle>=0 and heureActuelle<6:
                     self.write(c, "PAC", False)                
-                if heureActuelle>=6 and heureActuelle<7:
+                if heureActuelle>=6 and heureActuelle<8:
                     self.write(c, "PAC", True)
-                if heureActuelle>=7 and heureActuelle<17:
+                if heureActuelle>=8 and heureActuelle<18:
                     self.write(c, "PAC", False) 
-                if heureActuelle>=17 and heureActuelle<19:
+                if heureActuelle>=18 and heureActuelle<20:
                     self.write(c, "PAC", True)                    
-                if heureActuelle>=19 and heureActuelle<24:
+                if heureActuelle>=20 and heureActuelle<24:
                     self.write(c, "PAC", False)   
             #Action sur la pompe du ventilo-convecteur: 3 cas, stop, run, et auto
             self._log.info(
